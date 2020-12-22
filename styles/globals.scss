@@ -1,6 +1,6 @@
 html,
 body {
-  background-color: rgb(237, 231, 217);
+  background-color: #55b9f3;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -15,7 +15,9 @@ body {
 }
 
 h {
-  &1,
+  &1 {
+    margin: 50px 0;
+  }
   &3 {
     margin: 20px 0;
   }
@@ -30,9 +32,18 @@ button {
   width: 100px;
   height: 50px;
   margin: 0 5px;
-  background-color: rgb(237, 231, 217);
+  border-radius: 10px;
+  background: #daeffc;
+  outline: none;
+  border: none;
 }
 
 #controls {
-  color: rgb(226, 226, 226);
+  color: rgb(241, 240, 240);
+}
+
+@media only screen and (min-width: 800px) {
+  body {
+    font-size: 1.5em;
+  }
 }

@@ -7,8 +7,9 @@
 }
 
 .controls {
-  background-color: rgb(164, 150, 148);
-  border-radius: 5px;
+  border-radius: 27px;
+  background: #55b9f3;
+  box-shadow: -20px 20px 60px #489dcf, 20px -20px 60px #62d5ff;
   width: 60vw;
   padding: 1em;
   overflow: hidden;
@@ -19,6 +20,18 @@
     background-color: rgb(164, 150, 148);
   }
 }
+
+.fa {
+  color: rgb(241, 240, 240);
+  font-size: 14px;
+  width: 1.3em;
+  &p {
+    color: rgb(43, 35, 35);
+    font-size: 14px;
+    width: 1.3em;
+  }
+}
+
 @media only screen and (min-width: 800px) {
   .mod {
     width: 60vw;

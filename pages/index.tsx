@@ -5,18 +5,15 @@ import { ReactElement } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Home(): ReactElement {
-  enum ind {
-    Break = "BREAK",
-    Session = "SESSION",
-  }
   const [brkLng, setBrkLng] = useState(5);
   const [ssnLng, setSsnLng] = useState(25);
   const [min, setMin] = useState(ssnLng);
   const [sec, setSec] = useState(0);
+  const [minFm, setMinFm] = useState(min.toString());
   const [secFm, setSecFm] = useState("00");
   const [runClock, setRunClock] = useState(false);
   const [isSsn, setIsSsn] = useState(true);
-  const [indicator, setIndicator] = useState(ind.Session);
+  const [indicator, setIndicator] = useState("SESSION");
 
   useEffect(() => {
     if (runClock) {
@@ -45,6 +42,14 @@ export default function Home(): ReactElement {
   }, [sec]);
 
   useEffect(() => {
+    if (min < 10) {
+      setMinFm(`0${min}`);
+    } else {
+      setMinFm(min.toString());
+    }
+  }, [min]);
+
+  useEffect(() => {
     if (secFm === "59" && min > 0 && runClock) {
       setMin(min - 1);
     }
@@ -52,11 +57,11 @@ export default function Home(): ReactElement {
       if (isSsn) {
         setMin(brkLng);
         setIsSsn(false);
-        setIndicator(ind.Break);
+        setIndicator("BREAK");
       } else {
         setMin(ssnLng);
         setIsSsn(true);
-        setIndicator(ind.Session);
+        setIndicator("SESSION");
       }
       document.querySelector("audio")!.play();
     }
@@ -70,6 +75,7 @@ export default function Home(): ReactElement {
     setSecFm("00");
     setRunClock(false);
     setIsSsn(true);
+    setIndicator("SESSION");
     const audio = document.querySelector("audio");
     audio!.pause();
     audio!.currentTime = 0;
@@ -84,7 +90,7 @@ export default function Home(): ReactElement {
       <h1>Odoromop Clock</h1>
       <div id="controls" className={styles.controls}>
         <h3 id="timer-label">{indicator}</h3>
-        <h3 id="time-left">{`${min}:${secFm}`}</h3>
+        <h3 id="time-left">{`${minFm}:${secFm}`}</h3>
         <button
           id="start_stop"
           className={styles.button}
@@ -92,10 +98,13 @@ export default function Home(): ReactElement {
             setRunClock(!runClock);
           }}
         >
-          Start / Stop
+          <FontAwesomeIcon
+            className={styles.fap}
+            icon={runClock ? ["fas", "pause"] : ["fas", "play"]}
+          />
         </button>
         <button id="reset" className={styles.button} onClick={reset}>
-          Reset
+          <FontAwesomeIcon className={styles.fap} icon="redo" />
         </button>
         <audio id="beep" src="/beep.mp3">
           Your browser does not support the
@@ -112,11 +121,14 @@ export default function Home(): ReactElement {
             onClick={() => {
               if (brkLng < 60 && runClock === false) {
                 setBrkLng(brkLng + 1);
-                setSec(0);
+                if (indicator === "BREAK") {
+                  setMin(brkLng + 1);
+                  setSec(0);
+                }
               }
             }}
           >
-            Break Increment
+            <FontAwesomeIcon icon="arrow-up" className={styles.fa} />
           </button>
           <button
             id="break-decrement"
@@ -124,11 +136,14 @@ export default function Home(): ReactElement {
             onClick={() => {
               if (brkLng > 1 && runClock === false) {
                 setBrkLng(brkLng - 1);
-                setSec(0);
+                if (indicator === "BREAK") {
+                  setMin(brkLng - 1);
+                  setSec(0);
+                }
               }
             }}
           >
-            Break Decrement
+            <FontAwesomeIcon icon="arrow-down" className={styles.fa} />
           </button>
         </div>
         <div id="session-block">
@@ -140,12 +155,14 @@ export default function Home(): ReactElement {
             onClick={() => {
               if (ssnLng < 60 && runClock === false) {
                 setSsnLng(ssnLng + 1);
-                setMin(ssnLng + 1);
-                setSec(0);
+                if (indicator === "SESSION") {
+                  setMin(ssnLng + 1);
+                  setSec(0);
+                }
               }
             }}
           >
-            Session Increment
+            <FontAwesomeIcon icon="arrow-up" className={styles.fa} />
           </button>
           <button
             id="session-decrement"
@@ -153,12 +170,14 @@ export default function Home(): ReactElement {
             onClick={() => {
               if (ssnLng > 1 && runClock === false) {
                 setSsnLng(ssnLng - 1);
-                setMin(ssnLng - 1);
-                setSec(0);
+                if (indicator === "SESSION") {
+                  setMin(ssnLng - 1);
+                  setSec(0);
+                }
               }
             }}
           >
-            Session Decrement
+            <FontAwesomeIcon icon="arrow-down" className={styles.fa} />
           </button>
         </div>
       </div>{" "}
