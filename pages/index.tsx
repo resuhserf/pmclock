@@ -1,8 +1,10 @@
 import Head from "next/head";
 import styles from "styles/Home.module.scss";
 import { useState, useEffect } from "react";
+import { ReactElement } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function Home() {
+export default function Home(): ReactElement {
   enum ind {
     Break = "Break",
     Session = "Session",
@@ -76,79 +78,91 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Pomorodo Clock</title>
+        <title>Odoromop Clock</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <h1>Pomodoro Clock</h1>
-      <div id="break-label">Break Length</div>
-      <div id="session-label">Session Length</div>
-      <button
-        id="break-increment"
-        onClick={() => {
-          if (brkLng < 60 && runClock === false) {
-            setBrkLng(brkLng + 1);
-            setSec(0);
-          }
-        }}
-      >
-        Break Increment
-      </button>
-      <button
-        id="break-decrement"
-        onClick={() => {
-          if (brkLng > 1 && runClock === false) {
-            setBrkLng(brkLng - 1);
-            setSec(0);
-          }
-        }}
-      >
-        Break Decrement
-      </button>
-      <button
-        id="session-increment"
-        onClick={() => {
-          if (ssnLng < 60 && runClock === false) {
-            setSsnLng(ssnLng + 1);
-            setMin(ssnLng + 1);
-            setSec(0);
-          }
-        }}
-      >
-        Session Increment
-      </button>
-      <button
-        id="session-decrement"
-        onClick={() => {
-          if (ssnLng > 1 && runClock === false) {
-            setSsnLng(ssnLng - 1);
-            setMin(ssnLng - 1);
-            setSec(0);
-          }
-        }}
-      >
-        Session Decrement
-      </button>
-      <div id="break-length">{brkLng}</div>
-      <div id="session-length">{ssnLng}</div>
-      <div id="timer-label">{indicator}</div>
-      <div id="time-left">{`${min}:${secFm}`}</div>
-      <button
-        id="start_stop"
-        onClick={() => {
-          setRunClock(!runClock);
-        }}
-      >
-        Start / Stop
-      </button>
-      <button id="reset" onClick={reset}>
-        Reset
-      </button>
-      <audio id="beep" src="/beep.mp3">
-        Your browser does not support the
-        <code>audio</code> element.
-      </audio>
-      <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js" />
+      <h1>Odoromop Clock</h1>
+      <div id="controls">
+        <h3 id="timer-label">{indicator}</h3>
+        <h3 id="time-left">{`${min}:${secFm}`}</h3>
+        <button
+          id="start_stop"
+          className={styles.button}
+          onClick={() => {
+            setRunClock(!runClock);
+          }}
+        >
+          Start / Stop
+        </button>
+        <button id="reset" className={styles.button} onClick={reset}>
+          Reset
+        </button>
+        <audio id="beep" src="/beep.mp3">
+          Your browser does not support the
+          <code>audio</code> element.
+        </audio>
+        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js" />
+      </div>
+      <div className={styles.mod}>
+        <div id="break-block">
+          <h3 id="break-label">Break Length</h3>
+          <h3 id="break-length">{brkLng}</h3>
+          <button
+            id="break-increment"
+            className={styles.button}
+            onClick={() => {
+              if (brkLng < 60 && runClock === false) {
+                setBrkLng(brkLng + 1);
+                setSec(0);
+              }
+            }}
+          >
+            Break Increment
+          </button>
+          <button
+            id="break-decrement"
+            className={styles.button}
+            onClick={() => {
+              if (brkLng > 1 && runClock === false) {
+                setBrkLng(brkLng - 1);
+                setSec(0);
+              }
+            }}
+          >
+            Break Decrement
+          </button>
+        </div>
+        <div id="session-block">
+          <h3 id="session-label">Session Length</h3>
+          <h3 id="session-length">{ssnLng}</h3>
+          <button
+            id="session-increment"
+            className={styles.button}
+            onClick={() => {
+              if (ssnLng < 60 && runClock === false) {
+                setSsnLng(ssnLng + 1);
+                setMin(ssnLng + 1);
+                setSec(0);
+              }
+            }}
+          >
+            Session Increment
+          </button>
+          <button
+            id="session-decrement"
+            className={styles.button}
+            onClick={() => {
+              if (ssnLng > 1 && runClock === false) {
+                setSsnLng(ssnLng - 1);
+                setMin(ssnLng - 1);
+                setSec(0);
+              }
+            }}
+          >
+            Session Decrement
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
