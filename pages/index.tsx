@@ -55,14 +55,20 @@ export default function Home(): ReactElement {
     }
     if (secFm === "00" && min === 0 && runClock) {
       if (isSsn) {
-        setMin(brkLng);
-        setIsSsn(false);
+        setTimeout(() => {
+          setMin(brkLng);
+          setIsSsn(false);
+        }, 1000);
+
         setIndicator("BREAK");
       } else {
-        setMin(ssnLng);
-        setIsSsn(true);
+        setTimeout(() => {
+          setMin(ssnLng);
+          setIsSsn(true);
+        }, 1000);
         setIndicator("SESSION");
       }
+
       document.querySelector("audio")!.play();
     }
   }, [secFm]);
