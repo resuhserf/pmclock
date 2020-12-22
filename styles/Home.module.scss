@@ -1,22 +1,29 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.button {
-  background-color: transparent;
-  width: 100px;
-  height: 100px;
-  background-color: brown;
+.controls {
+  background-color: rgb(164, 150, 148);
+  border-radius: 5px;
+  width: 60vw;
+  padding: 1em;
+  overflow: hidden;
 }
 
 .mod {
-  display: flex;
-  & > div {
-    margin: 2em;
+  button {
+    background-color: rgb(164, 150, 148);
+  }
+}
+@media only screen and (min-width: 800px) {
+  .mod {
+    width: 60vw;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
   }
 }

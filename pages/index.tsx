@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Home(): ReactElement {
   enum ind {
-    Break = "Break",
-    Session = "Session",
+    Break = "BREAK",
+    Session = "SESSION",
   }
   const [brkLng, setBrkLng] = useState(5);
   const [ssnLng, setSsnLng] = useState(25);
@@ -82,7 +82,7 @@ export default function Home(): ReactElement {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>Odoromop Clock</h1>
-      <div id="controls">
+      <div id="controls" className={styles.controls}>
         <h3 id="timer-label">{indicator}</h3>
         <h3 id="time-left">{`${min}:${secFm}`}</h3>
         <button
@@ -101,7 +101,6 @@ export default function Home(): ReactElement {
           Your browser does not support the
           <code>audio</code> element.
         </audio>
-        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js" />
       </div>
       <div className={styles.mod}>
         <div id="break-block">
@@ -162,7 +161,8 @@ export default function Home(): ReactElement {
             Session Decrement
           </button>
         </div>
-      </div>
+      </div>{" "}
+      <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js" />
     </div>
   );
 }

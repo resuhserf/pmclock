@@ -1,22 +1,38 @@
 html,
 body {
-  // background-color: rgb(156, 156, 131);
+  background-color: rgb(237, 231, 217);
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
+  color: rgb(126, 25, 25);
+  text-align: center;
+  font-size: 1.2em;
 }
 
 * {
   box-sizing: border-box;
 }
 
-h3,
-h1 {
-  text-align: center;
+h {
+  &1,
+  &3 {
+    margin: 20px 0;
+  }
+}
+
+#time-left {
+  font-size: 2.5em;
+}
+
+button {
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
+  margin: 0 5px;
+  background-color: rgb(237, 231, 217);
+}
+
+#controls {
+  color: rgb(226, 226, 226);
 }
